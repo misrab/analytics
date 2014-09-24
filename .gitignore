@@ -3,6 +3,9 @@
 *.a
 *.so
 
+# Sass
+*.sassc
+
 # Folders
 _obj
 _test
