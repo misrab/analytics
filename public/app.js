@@ -1,6 +1,7 @@
 var app = angular.module('app', [
 	'ngRoute',
 	'ngCookies',
+  'd3Primitives',
   //'d3',
   //'hljs' // syntax highlighting in landing.html
   'http-auth-interceptor'
@@ -28,23 +29,13 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
   $locationProvider.html5Mode(true);
 
 
-  // $routeProvider
-  //   .when('/', {
-  //     templateUrl:  '/views/personal/landing.html',
-  //     controller:   "PersonalLandingController",
-  //     requireLogin: false
-  //   })
-  //   .when('/cyberdyne', {
-  //     templateUrl:  '/views/cyberdyne/landing.html',
-  //     controller:   "CyberdyneLandingController" ,
-  //     requireLogin: false
-  //   })
-  //   .when('/cyberdyne/core', {
-  //     templateUrl:  '/views/cyberdyne/core.html',
-  //     controller:   "CyberdyneCoreController",
-  //     requireLogin: true
-  //   })  
-  //   .otherwise({ redirectTo: '/' });
+  $routeProvider
+    .when('/', {
+      templateUrl:  '/views/landing.html',
+      controller:   "LandingController",
+      requireLogin: false
+    })
+    .otherwise({ redirectTo: '/' });
 
 
 

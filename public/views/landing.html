@@ -1,0 +1,78 @@
+<div class="row small_space_top">
+	<div class="col-md-12">
+		<div class="my_hide alert alert-warning text-center full_width">
+			You do not seem to have an API key
+		</div>
+		<div class="my_hide alert alert-danger text-center full_width">
+			Something went wrong
+		</div>
+		<div class="my_hide alert alert-success text-center full_width">
+			Successful
+		</div>
+
+	</div>
+</div>
+
+<div class="row big_space_top">
+	<div class="col-md-3">
+		<h1 style="margin-top: 0;">Cyberdyne Analytics</h1>
+		<h4>Play with data - fast, easily, thoroughly</h4>
+		<div class="divide"></div>
+		
+
+		<div>
+			<h3>Add Chart</h3>
+
+			<div class="input-group">
+				<h5>Meta<h5>
+				<input style="margin-top: 0;" type="text" placeholder="Title"></input>
+				<textarea placeholder="description"></textarea>
+				<input type="text" placeholder="x-label"></input>
+				<input type="text" placeholder="y-label"></input>
+			</div>
+
+			<div class="input-group">
+				<h5>Data<h5>
+				<input style="margin-top: 0;" type="text" placeholder="API url"></input>
+				<div style="margin-top: 10px;" class="small_space_top file_wrapper">
+					<input type="file" ></input>
+				</div>
+			</div>
+			<div class="input-group">
+				<h5>Permissions<h5>
+				<input style="margin-top: 0;" type="text" placeholder="API key"></input>
+				<input type="text" placeholder="username"></input>
+				<input type="password" placeholder="password"></input>
+			</div>
+			<div class="input-group">
+				<h5>Add Chart<h5>
+				<button class="btn btn-default">
+					<span class="glyphicon glyphicon-stats"></span>
+				</button>
+				<button class="btn btn-default">
+					<span class="glyphicon glyphicon-th"></span>
+				</button>
+				<button class="btn btn-default">
+					<span class="glyphicon glyphicon-time"></span>
+				</button>
+				<button class="btn btn-default">
+					<span class="glyphicon glyphicon-certificate"></span>
+				</button>
+			</div>
+			
+
+			<div class="divide"></div>
+		</div>
+
+		<div>
+			<h3>Repertoire</h3>
+			<div>You have no existing chart groups</div>
+		</div>
+	</div>
+	<div class="col-md-9">
+		<div id="workspace">
+			<bar-chart data="test"></bar-chart>
+
+		</div>
+	</div>
+</div>

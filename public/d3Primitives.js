@@ -1,0 +1,1 @@
+var d3PrimitivesModule = angular.module('d3Primitives', [ 'd3' ]);
