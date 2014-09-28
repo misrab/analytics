@@ -46,13 +46,13 @@
 			</div>
 			<div class="input-group">
 				<h5>Add Chart<h5>
-				<button class="btn btn-default">
+				<button ng-click="addChart('bar')" class="btn btn-default">
 					<span class="glyphicon glyphicon-stats"></span>
 				</button>
-				<button class="btn btn-default">
+				<button ng-click="addChart('scatter')" class="btn btn-default">
 					<span class="glyphicon glyphicon-th"></span>
 				</button>
-				<button class="btn btn-default">
+				<button ng-click="addChart('line')" class="btn btn-default">
 					<span class="glyphicon glyphicon-time"></span>
 				</button>
 				<button class="btn btn-default">
@@ -71,8 +71,11 @@
 	</div>
 	<div class="col-md-9">
 		<div id="workspace">
-			<bar-chart data="test"></bar-chart>
+			<!-- <bar-chart data="barData"></bar-chart> -->
 
+			<!-- <scatter height="450" width="400" data="scatterData"></scatter> -->
+
+			<!-- <time-series smooth="true" data="staticTimeSeriesData" y-label="Total" recentdata=""></time-series> -->
 		</div>
 	</div>
 </div>

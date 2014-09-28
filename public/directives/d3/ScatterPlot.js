@@ -1,6 +1,6 @@
 var d3PrimitivesModule = angular.module('d3Primitives');
 
-d3PrimitivesModule.directive('scatterPlot', function(d3Service) {
+d3PrimitivesModule.directive('scatter', function(d3Service) {
 	return {
 		restrict: 'E', // element tag only
 		scope: {

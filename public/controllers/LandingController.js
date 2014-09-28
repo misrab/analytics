@@ -2,13 +2,42 @@ var app = angular.module('app');
 
 
 app.controller('LandingController', 
-function($routeParams, $cookieStore, $rootScope, $scope) {
+function($routeParams, $cookieStore, $rootScope, $scope, $compile) {
 	init();
 
 	function init() {
 		checkKey();
 
-		$scope.test = {
+		testData($scope);
+
+		$scope.addChart = addChart;
+	};
+
+
+	function addChart(type) {
+		var div;
+		switch(type) {
+			case "bar":
+				//div = $('<bar-chart data="barData"></bar-chart>');
+				div = $compile( '<bar-chart data="barData"></bar-chart>' )( $scope );
+				break;
+			case "scatter":
+				div = $compile( '<scatter height="450" data="scatterData"></scatter>' )( $scope );
+				break;
+
+			case "line":
+				div = $compile( '<time-series smooth="true" data="staticTimeSeriesData" y-label="Total" recentdata=""></time-series>' )( $scope );
+				break;
+			default:
+				return;
+		}
+
+		$("#workspace").append(div);
+	};
+
+
+	function testData($scope) {
+		$scope.barData = {
 			'group1': [
 				{ name: "Bob", score: 10 },
 				{ name: "Joe", score: 3 }
@@ -26,8 +55,38 @@ function($routeParams, $cookieStore, $rootScope, $scope) {
 				{ name: "Jill", score: 4 },
 			]
 		};
-	};
 
+		var BAND = 10;
+		$scope.scatterData = [
+	      {label: "dunno", x: -BAND + Math.random()*2*BAND, y : -BAND + Math.random()*2*BAND, score: 3},
+
+	      {label: "yes", x: -BAND + Math.random()*2*BAND, y : -BAND + Math.random()*2*BAND, score: 12},
+	      {label: "yes", x: -BAND + Math.random()*2*BAND, y : -BAND + Math.random()*2*BAND, score: 23},
+	      {label: "yes", x: -BAND + Math.random()*2*BAND, y : -BAND + Math.random()*2*BAND},
+	      {label: "yes", x: -BAND + Math.random()*2*BAND, y : -BAND + Math.random()*2*BAND},
+
+	      {label: "no", x:  -BAND + Math.random()*2*BAND, y : -BAND + Math.random()*2*BAND},
+	      {label: "no", x: -BAND + Math.random()*2*BAND, y : -BAND + Math.random()*2*BAND},
+	      {label: "no", x: -BAND + Math.random()*2*BAND, y : -BAND + Math.random()*2*BAND},
+	      {label: "no", x:  -BAND + Math.random()*2*BAND, y : -BAND + Math.random()*2*BAND},
+	      {label: "no", x: -BAND + Math.random()*2*BAND, y : -BAND + Math.random()*2*BAND},
+
+	      {label: "maybe", x:  -BAND + Math.random()*2*BAND, y :  -BAND + Math.random()*2*BAND, score: 10},
+	      {label: "maybe", x: -BAND + Math.random()*2*BAND, y : -BAND + Math.random()*2*BAND, score: -5}
+	    ];
+
+	  
+	    $scope.timeSeriesRecentData = {};
+      	$scope.staticTimeSeriesData = {
+        	"cows": [],
+        	"chickens": []
+      	};
+      	for (k in $scope.staticTimeSeriesData) {
+        	for (var i=0; i<20; i++) {
+          		$scope.staticTimeSeriesData[k].push(-BAND + Math.random()*2*BAND);
+      	  	}
+      	}
+	};
 
 
 	function showAlert(type, msg) {
