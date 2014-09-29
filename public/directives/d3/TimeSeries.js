@@ -23,12 +23,13 @@ d3PrimitivesModule.directive('timeSeries', function(d3Service) {
 			d3Service.d3().then(function(d3) {
 				// set global variables and create svg
 				var height = attrs.height || 300;
-				var	yLabel = attrs.yLabel || "";
+				var width = attrs.width || "100%";
+				var	labelY = attrs.labelY || "";
 				var legend_height = 50;
 
 				var svg = d3.select(element[0])
 		            .append('svg')
-		            .style('width', '100%')
+		            .style('width', width)
 		            .style('height', height + legend_height);
 		        var width = d3.select(element[0]).node().offsetWidth;
 		        var margin = 20;
@@ -265,13 +266,13 @@ d3PrimitivesModule.directive('timeSeries', function(d3Service) {
 					    	.tickSize(5, 0)
 					    );
 
-					if (yLabel !== "") {
+					if (labelY !== "") {
 						yAxis.append("text")
 						    .attr("text-anchor", "start")
 						    .attr("dominant-baseline", "hanging")
 						    .attr("x", margin/2)
 						    .attr("y", 5) // naughty padding
-						    .text(yLabel);
+						    .text(labelY);
 					}
 					
 	          	};

@@ -10,9 +10,11 @@ d3PrimitivesModule.directive('scatter', function(d3Service) {
 		link: function(scope, element, attrs) {
 			// d3 is the raw d3 object
 			d3Service.d3().then(function(d3) {
+				var width = attrs.width || "100%";
+
 				var svg = d3.select(element[0])
 		            .append('svg')
-		            .style('width', '100%');
+		            .style('width', width);
 		            //.style('height', '100%');
 
 
@@ -20,13 +22,12 @@ d3PrimitivesModule.directive('scatter', function(d3Service) {
 		        // ! do this after svg appended, in case we'd like to use 
 		        // safe defaults...
 				var margin = parseInt(attrs.margin) || 20,
-					yLabel = attrs.labelY || "y",
-					xLabel = attrs.labelX || "x",
-					width = attrs.width || d3.select(element[0]).node().offsetWidth - margin,
-					height = attrs.height || 200,
+					labelY = attrs.labelY || "y",
+					labelX = attrs.labelX || "x",
+					width = d3.select(element[0]).node().offsetWidth - margin,
+					height = attrs.height || element.width() ||  200,
 					radius = attrs.radius || 7;
 
-					
 
 		          // Browser onresize event
 		        window.onresize = function() {
@@ -103,7 +104,7 @@ d3PrimitivesModule.directive('scatter', function(d3Service) {
 					// add custom definitions e.g. arrowHead for axes
 					scope.addDefinitions(svg);
 
-					scope.drawAxes(svg, width, height, margin, xLabel, yLabel, origin);
+					scope.drawAxes(svg, width, height, margin, labelX, labelY, origin);
 					
 
 					scope.plotData(svg, data, scoreScale, xScale, yScale, margin, radius, color, origin, height);
@@ -258,7 +259,7 @@ d3PrimitivesModule.directive('scatter', function(d3Service) {
 				};
 
 
-				scope.drawAxes = function(svg, width, height, margin, xLabel, yLabel, origin) {
+				scope.drawAxes = function(svg, width, height, margin, labelX, labelY, origin) {
 					var xAxis = svg.append("g")
 						.attr("class", "x-axis")
 						.attr("transform", function(d) {
@@ -274,7 +275,7 @@ d3PrimitivesModule.directive('scatter', function(d3Service) {
 						.attr("marker-end", "url(#arrowHead)");
 					xAxis.append("text")
 						.text(function(d) {
-							return xLabel;
+							return labelX;
 						})
 						.attr("class", "label")
 				      	.attr("x", width - margin)
@@ -298,7 +299,7 @@ d3PrimitivesModule.directive('scatter', function(d3Service) {
 						.attr("marker-end", "url(#arrowHead)");
 					yAxis.append("text")
 						.text(function(d) {
-							return yLabel;
+							return labelY;
 						})
 						.attr("class", "label")
 				      	.attr("x", -margin/2)

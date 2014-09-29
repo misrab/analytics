@@ -16,11 +16,12 @@ d3PrimitivesModule.directive('graph', function(d3Service) {
 				
 				// set global variables and create svg
 				var height = attrs.height || 300; 
+				var width = attrs.width || "100%";
 				var legend_height = 50;
 
 				var svg = d3.select(element[0])
 		            .append('svg')
-		            .style('width', '100%')
+		            .style('width', width)
 		            .style('height', height + legend_height);
 		        var width = d3.select(element[0]).node().offsetWidth;
 		        var margin = 20;

@@ -13,26 +13,42 @@ function($routeParams, $cookieStore, $rootScope, $scope, $compile) {
 		$scope.addChart = addChart;
 	};
 
-
+	// TODO this will eventually get data, create something on the 
+	// server, 
 	function addChart(type) {
-		var div;
+		// overarching div
+		var div = $('<div style="width: 50%; display: inline-block;"></div>');
+		var xLabel = $('input[name="x-label"]').val();
+		var yLabel = $('input[name="y-label"]').val();
+
+		var directive;
 		switch(type) {
 			case "bar":
 				//div = $('<bar-chart data="barData"></bar-chart>');
-				div = $compile( '<bar-chart data="barData"></bar-chart>' )( $scope );
+				directive = $compile( '<bar-chart label-y="' + yLabel + '" label-x="'+ xLabel +'" data="barData"></bar-chart>' )( $scope );
 				break;
 			case "scatter":
-				div = $compile( '<scatter height="450" data="scatterData"></scatter>' )( $scope );
+				directive = $compile( '<scatter label-y="' + yLabel + '" label-x="'+ xLabel +'" data="scatterData"></scatter>' )( $scope );
 				break;
-
 			case "line":
-				div = $compile( '<time-series smooth="true" data="staticTimeSeriesData" y-label="Total" recentdata=""></time-series>' )( $scope );
+				directive = $compile( '<time-series label-y="' + yLabel + '" label-x="'+ xLabel +'" smooth="true" data="staticTimeSeriesData" y-label="Total" recentdata=""></time-series>' )( $scope );
 				break;
 			default:
 				return;
 		}
 
-		$("#workspace").append(div);
+		var workspace = $('#workspace');
+		// append title
+		var title = $('input[name="title"]').val();
+		div.append('<h3 class="text-center">' + title + '</h3>')
+		// append description
+		var description = $('textarea[name="description"]').val();
+		div.append('<p>' + description + '</p>')
+
+		// append directive
+		div.append(directive);
+		// add to workspace
+		workspace.append(div);
 	};
 
 
